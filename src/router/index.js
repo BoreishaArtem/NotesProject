@@ -1,22 +1,43 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Home from '../components/Home'
+import Login from '../components/Auth/Login'
+import Registration from '../components/Auth/Registration'
+import newNote from '../components/Notes/newNote'
+import Todo from '../components/Todo/Todo'
+import routeGuard from './routeFuard'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
-    name: 'Home',
+    path: '',
+    name: 'home',
     component: Home
+    // beforeEnter: routeGuard
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    path: '/login',
+    name: 'login',
+    component: Login
+  },
+  {
+    path: '/registration',
+    name: 'registration',
+    component: Registration
+  },
+  {
+    path: '/new',
+    name: 'newNote',
+    component: newNote,
+    beforeEnter: routeGuard
+  },
+  {
+    path: '/todo/:id',
+    name: 'todo',
+    props: true,
+    component: Todo,
+    beforeEnter: routeGuard
   }
 ]
 
